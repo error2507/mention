@@ -2,11 +2,11 @@
   "name": "mention",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "error2507",
+  "author": "error2507, DwarfLop",
   "license": "ISC",
   "dependencies": {
     "discord.js": "^11.4.2"
