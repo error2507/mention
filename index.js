@@ -21,12 +21,12 @@ client.on("ready", async () => {
 
 client.on('message', async (message) => {
     if (message.channel.type == 'text') {
-        var rolesToMention = [];
+        let rolesToMention = [];
         for(i = 0; i < roles.list.length; i++) {
             if (!(message.webhookID)) {
                 if (!(message.author.bot)) {
                     if (message.content.toUpperCase().includes('@' + message.guild.roles.get(roles.list[i].id).name.toUpperCase())) {
-                        var mentionRole = message.guild.roles.get(roles.list[i].id)
+                        let mentionRole = message.guild.roles.get(roles.list[i].id)
                         if (!(cooldowns[message.author.id]) || !(cooldowns[message.author.id].includes(mentionRole.id))) {
                             missingPerms = await check(message.guild)
                             if (missingPerms.length == 0) {
@@ -49,13 +49,13 @@ client.on('message', async (message) => {
                     if (collected.size == 1) {
                         if (collected.first().emoji == '✅') {
                             message.delete();
-                            var text = message.content.toUpperCase().split(' ');
-                            var textToSend = message.content.split(' ');
+                            let text = message.content.toUpperCase().split(' ');
+                            let textToSend = message.content.split(' ');
                             for(r = 0; r < rolesToMention.length; r++) {
                                 if (message.content.toUpperCase().includes(rolesToMention[r].name.toUpperCase())) {
                                     for(w = 0; w < text.length; w++) {
                                         if (text[w].startsWith('@')) {
-                                            var withoutAt = await text[w].substr(1, text[w].length)
+                                            let withoutAt = await text[w].substr(1, text[w].length)
                                             if (withoutAt.toUpperCase() == rolesToMention[r].name.toUpperCase()) {
                                                 textToSend[w] = rolesToMention[r].toString();
                                                 //Adding Cooldown
@@ -63,7 +63,7 @@ client.on('message', async (message) => {
                                                     if (roles.list[i].id == rolesToMention[r].id) {
                                                         if (cooldowns[message.author.id]) {
                                                             await cooldowns[message.author.id].push(rolesToMention[r].id);
-                                                            var idToRemoveIndex = await cooldowns[message.author.id].length - 1;
+                                                            let idToRemoveIndex = await cooldowns[message.author.id].length - 1;
                                                             setTimeout(function() {
                                                                 cooldowns[message.author.id].splice(idToRemoveIndex, 1);
                                                             }, roles.list[i].cooldown * 1000);
@@ -72,7 +72,7 @@ client.on('message', async (message) => {
                                                                 cooldowns[message.author.id] = [rolesToMention[r].id];
                                                             }
                                                             await cooldownArrayCreate();
-                                                            var idToRemoveIndex = await cooldowns[message.author.id].length - 1;
+                                                            let idToRemoveIndex = await cooldowns[message.author.id].length - 1;
                                                             setTimeout(function() {
                                                                 cooldowns[message.author.id].splice(idToRemoveIndex, 1);
                                                             }, roles.list[i].cooldown * 1000)
