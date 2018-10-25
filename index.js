@@ -20,7 +20,8 @@ client.on("ready", async () => {
  */
 
 client.on('message', async (message) => {
-    if (message.channel.type == 'text') {
+    let permsMissing = false
+    if (message.channel.type == 'text' && message.author.id != client.user.id) {
         let rolesToMention = [];
         for(i = 0; i < roles.list.length; i++) {
             if (!(message.webhookID)) {
@@ -32,13 +33,17 @@ client.on('message', async (message) => {
                             if (missingPerms.length == 0) {
                                 rolesToMention.push(mentionRole);
                             } else {
-                                message.channel.send(`I need the following perms to work properly: \`\`\`https\n${missingPerms.join(",\n")}\`\`\``);
+                                permsMissing = true;
                             }
                         }
                     }
                 }
             }
         }
+        if (permsMissing) {
+            message.channel.send(`I need the following perms to work properly: \`\`\`https\n${missingPerms.join(",\n")}\`\`\``);
+        }
+
         if (rolesToMention.length != 0) {
             message.channel.send(`Do you really want to mention following roles?\n${rolesToMention.map(r => '**' + r.name + '**').join('\n')}`).then(async askmessage => {
                 await askmessage.react('✅');
