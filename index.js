@@ -13,6 +13,7 @@ let cooldowns = {};
 
 client.on("ready", async () => {
     console.log(`${client.user.username}#${client.user.discriminator} is ready. ${roles.list.length} roles loaded.`);
+    client.user.setActivity('your roles', {type: 'WATCHING'});
 });
 
 /**
