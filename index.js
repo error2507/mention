@@ -27,6 +27,7 @@ client.on('message', async (message) => {
         switch (cmd) {
             case 'addrole':
                 addrole(message);
+                break;
         }
     } else {
         let permsMissing = false
